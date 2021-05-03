@@ -197,14 +197,14 @@ class Missile:
 
     def _collide(self):
         if self.dir_y < 0:
-            for index, enemy in enumerate(enemies):
+            for enemy in enemies[:]:
                 if (
                     self.y == enemy.y
                     and enemy.x <= self.x < enemy.x + enemy.skin_length
                 ):
                     self._destroyed = True
-                    enemies[index].erase()
-                    del enemies[index]
+                    enemy.erase()
+                    enemies.remove(enemy)
                     return
         else:
             if (
@@ -263,10 +263,10 @@ while True:
         spaceship.shoot()
 
     # missiles management
-    for index, missile in enumerate(missiles[:]):
+    for missile in missiles[:]:
         missile.move()
         if missile.destroyed:
-            del missiles[index]
+            missiles.remove(missile)
 
     # enemies management
     if not clock_time % 10:
