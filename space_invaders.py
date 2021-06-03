@@ -42,14 +42,14 @@ def move(x, y):
 
 def borders():
     move(1, 1)
-    uart.write("#" * SCREEN_WIDTH)
+    uart.write("█" * SCREEN_WIDTH)
     move(1, SCREEN_HEIGHT)
-    uart.write("#" * SCREEN_WIDTH)
+    uart.write("█" * SCREEN_WIDTH)
     for y in range(1, SCREEN_HEIGHT):
         move(1, y)
-        uart.write("#")
+        uart.write("█")
         move(SCREEN_WIDTH, y)
-        uart.write("#")
+        uart.write("█")
 
 
 def push_button_pressed():
@@ -128,7 +128,7 @@ class Spaceship:
         self.y = y
         self.last_shoot_time = 0
         self.missile_dir = -1 if y == SPACESHIP_Y else 1
-        self.missile_skin = "|" if y == SPACESHIP_Y else "v"
+        self.missile_skin = "💈" if y == SPACESHIP_Y else "⚡"
 
     @property
     def skin(self):
@@ -228,7 +228,7 @@ print_logo(logo)
 borders()
 
 # spaceship creation
-spaceship = Spaceship(x=(SCREEN_WIDTH - 5) // 2, y=SPACESHIP_Y, skin="|-O-|")
+spaceship = Spaceship(x=(SCREEN_WIDTH - 5) // 2, y=SPACESHIP_Y, skin="┣━☗━┫")
 spaceship.print()
 
 # missiles creation
@@ -238,7 +238,7 @@ missiles = []
 enemies = []
 for x in range(10):
     for y in range(4):
-        enemies.append(Spaceship(x=10 + x * 18, y=3 + 2 * y, skin="||--V--||"))
+        enemies.append(Spaceship(x=10 + x * 18, y=3 + 2 * y, skin="╠══V══╣"))
         enemies[-1].print()
 enemies_dir = -1
 enemies_moves_left = 0
